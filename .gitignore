@@ -7,7 +7,6 @@ __pycache__/
 # Sphinx documentation
 /docs/build/
 /docs/source/auto*
-/docs/source/sg_execution_times.rst
 
 # coverage
 .coverage

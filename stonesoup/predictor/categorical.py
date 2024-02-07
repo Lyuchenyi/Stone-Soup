@@ -46,8 +46,7 @@ class HMMPredictor(Predictor):
                                                            **kwargs)
 
         return Prediction.from_state(prior, prediction_vector, timestamp=timestamp,
-                                     transition_model=self.transition_model,
-                                     prior=prior)
+                                     transition_model=self.transition_model)
 
     def _predict_over_interval(self, prior, timestamp):
         """Private method to get the prediction interval (or None)

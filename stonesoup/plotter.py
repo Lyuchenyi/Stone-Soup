@@ -994,8 +994,8 @@ class Plotterly(_Plotter):
 
         from plotly import colors
         layout_kwargs = dict(
-            xaxis_title="x",
-            yaxis_title="y",
+            xaxis=dict(title=dict(text="<i>x</i>")),
+            yaxis=dict(title=dict(text="<i>y</i>"), scaleanchor="x", scaleratio=1),
             colorway=colors.qualitative.Plotly,  # Needed to match colours later.
         )
         layout_kwargs.update(kwargs)
@@ -1130,7 +1130,7 @@ class Plotterly(_Plotter):
                 measurement_kwargs['showlegend'] = True
             else:
                 measurement_kwargs['showlegend'] = False
-            detection_array = np.asarray(list(plot_detections.values()), dtype=np.float64)
+            detection_array = np.asfarray(list(plot_detections.values()))
 
             if len(mapping) == 1:
                 self.fig.add_scatter(
@@ -1161,7 +1161,7 @@ class Plotterly(_Plotter):
                 measurement_kwargs['showlegend'] = True
             else:
                 measurement_kwargs['showlegend'] = False
-            clutter_array = np.asarray(list(plot_clutter.values()), dtype=np.float64)
+            clutter_array = np.asfarray(list(plot_clutter.values()))
 
             if len(mapping) == 1:
                 self.fig.add_scatter(

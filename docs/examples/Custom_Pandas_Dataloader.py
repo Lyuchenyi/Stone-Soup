@@ -137,7 +137,7 @@ class DataFrameGroundTruthReader(GroundTruthReader, _DataFrameReader):
 
             state = GroundTruthState(np.array([[row[col_name]] for col_name
                                               in self.state_vector_fields],
-                                              dtype=np.float64),
+                                              dtype=np.float_),
                                      timestamp=time,
                                      metadata=self._get_metadata(row))
 
@@ -270,7 +270,7 @@ class DataFrameDetectionReader(DetectionReader, _DataFrameReader):
 
             detections.add(Detection(
                 np.array([[row[col_name]] for col_name in self.state_vector_fields],
-                         dtype=np.float64),
+                         dtype=np.float_),
                 timestamp=time,
                 metadata=self._get_metadata(row)))
 
