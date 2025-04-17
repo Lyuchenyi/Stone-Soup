@@ -29,17 +29,33 @@ from datetime import datetime
 # ^^^^^^^^^^^^^^^^^
 #
 
-from stonesoup.types.groundtruth import GroundTruthPath, GroundTruthState
+
 
 start_time = datetime.now().replace(second=0, microsecond=0)
 np.random.seed(1)
 # %%
 # We can now simulate a ground truth starting (0,0) and moving to the north east.
-truth = GroundTruthPath()
 
-num_steps = 20
-for k in range(1, num_steps + 1):
-    truth.append(GroundTruthState())
+from stonesoup.types.array import StateVector
+from stonesoup.types.groundtruth import GroundTruthPath, GroundTruthState
+
+truth = GroundTruthPath()
+start_point = np.array([0,0])
+end_point = np.array([10,5])
+num_points = 10
+mu = 0
+sigma = 0.5
+
+time = np.linspace(0, 1, num_points) 
+points = start_point + (end_point - start_point) * time[:, np.newaxis]
+
+
+noise = np.random.rand(num_points, 1) * sigma
+
+for i, t in enumerate(time):
+    position = start_point + (end_point - start_point) * t + noise[i]
+    truth.append(GroundTruthState(state_vector=StateVector(position.reshape(-1, 1)),timestamp=t))
+
 
 # %%
 # We now have ground truth is generated and we can plot the result.
@@ -82,7 +98,7 @@ for state in truth:
 
 # %%
 # Plot the result, again mapping the x and y position values
-plotter.plot_measurements(measurements, [0, 2])
+plotter.plot_measurements(measurements, [0, 1])
 plotter.fig
 
 # %%
